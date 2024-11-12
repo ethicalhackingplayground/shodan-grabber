@@ -29,7 +29,7 @@ const helpText = () => {
 
     const usage = chalk.blueBright(
       "  Usage:\n" +
-        "    node index.js --query=<query> --help=<help> --max_parallel=<max_parallel=10> --retry_delay=<retry_delay=30000>"
+        "    node index.js --query=<query> --help=<help> --max_parallel=<max_parallel=100> --retry_delay=<retry_delay=30000>"
     );
 
     const example = chalk.blueBright(
