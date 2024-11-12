@@ -2,18 +2,81 @@ const puppeteer = require("puppeteer");
 const fs = require("fs");
 const path = require("path");
 const minimist = require("minimist");
+
+const helpText = () => {
+  (async () => {
+    const chalk = (await import("chalk")).default;
+    const logo = chalk.blueBright(
+      `
+      __             __                                       __     __               
+.-----.|  |--.-----.--|  |.---.-.-----.______.-----.----.---.-.|  |--.|  |--.-----.----.
+|__ --||     |  _  |  _  ||  _  |     |______|  _  |   _|  _  ||  _  ||  _  |  -__|   _|
+|_____||__|__|_____|_____||___._|__|__|      |___  |__| |___._||_____||_____|_____|__|  
+                                           |_____|          v1.0.0
+`
+    );
+
+    const description = chalk.blueBright(
+      "Shodan-Grabber\n" +
+        "===============\n" +
+        "\n" +
+        "A Node.js tool for scraping IP addresses and other information\n" +
+        "from Shodan's web interface. It utilizes Puppeteer for web\n" +
+        "scraping and handles rate limits by implementing retries with\n" +
+        "delays. The tool can run multiple scraping tasks in parallel and\n" +
+        "outputs the data to text files.\n"
+    );
+
+    const usage = chalk.blueBright(
+      "  Usage:\n" +
+        "    node index.js --query=<query> --help=<help> --max_parallel=<max_parallel=10> --retry_delay=<retry_delay=30000>"
+    );
+
+    const example = chalk.blueBright(
+      "\n  Example:\n" + '    node index.js --query="bmw.com"'
+    );
+
+    console.log(chalk.blueBright(logo));
+    console.log(chalk.blueBright(description));
+    console.log(chalk.blueBright(usage));
+    console.log(chalk.blueBright(example));
+
+    process.exit(0);
+  })();
+};
+
 (async () => {
   const chalk = (await import("chalk")).default;
 
-  // Parse arguments
-  const args = minimist(process.argv.slice(2));
+  // Parse command line arguments
+  let args = null;
+
+  try {
+    // Parse arguments
+    args = minimist(process.argv.slice(2));
+  } catch (_) {
+    helpText();
+  }
+
+  // Search query argument
   const query = args.query;
 
-  if (!query) {
+  // Max parallel tasks and delay between retries
+  const MAX_PARALLEL = args.max_parallel || 100;
+  const RETRY_DELAY_MS = args.retry_delay || 30000;
+
+  if (args.help || args.h || !query) {
+    helpText();
     console.error(
       chalk.red("⚠️  Please specify a query with the --query argument.")
     );
-    process.exit(1);
+  } else {
+    if (!query) {
+      console.error(
+        chalk.red("⚠️  Please specify a query with the --query argument.")
+      );
+      process.exit(1);
+    }
   }
 
   // Ensure output directory exists
@@ -103,10 +166,6 @@ const minimist = require("minimist");
     "vuln",
     "vuln.verified",
   ];
-
-  // Max parallel tasks and delay between retries
-  const MAX_PARALLEL = 10;
-  const RETRY_DELAY_MS = 30000;
 
   async function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
