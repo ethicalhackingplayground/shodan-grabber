@@ -78,7 +78,7 @@ You can customize the following constants in `index.js`:
 - `MAX_PARALLEL`: The maximum number of parallel tasks (default is `10`).
 - `RETRY_DELAY_MS`: The delay in milliseconds before retrying when rate-limited (default is `30000`).
 
-### Future Plans
+## Future Plans
 
 In the future, Shodan-Grabber may be ported to GoLang or Rust to improve performance and reduce the dependency on Node.js.
 
