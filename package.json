@@ -1,0 +1,17 @@
+{
+  "name": "shodan-grabber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "minimist": "^1.2.8",
+    "puppeteer": "^23.7.1"
+  }
+}
