@@ -91,5 +91,3 @@ Feel free to open issues or submit pull requests. Contributions are welcome!
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
-
-Replace `https://github.com/ethicalhackingplayground/shodan-grabber.git` with your actual GitHub repository URL. This README should provide a clear overview of your project and how to use it!
