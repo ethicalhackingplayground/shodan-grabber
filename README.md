@@ -47,6 +47,10 @@ node index.js --query="example.com"
 node index.js --query="bmw.com"
 ```
 
+## Demo
+
+[![asciicast](https://asciinema.org/a/8k1c1zIm6c9phoLzFksndiX5s.svg)](https://asciinema.org/a/8k1c1zIm6c9phoLzFksndiX5s)
+
 This command will scrape IPs and related data for categories associated with "bmw.com" from Shodan and save the output into separate files in the `output` directory.
 
 ### Options
